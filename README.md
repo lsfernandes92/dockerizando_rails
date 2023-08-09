@@ -15,13 +15,13 @@ A solução para esses problemas foi a virtualização dos recursos físicos, re
 
 Porém ainda assim VM's ficam para trás nos quesitos:
 
-* Custo de manutenção/atualização de SO
+* Custo de manutenção/atualização do sistema operacional
 * Custo de hardware que cada VM's precisa ter
 * Manter programas e ambiente de desenvolvimento
 
 ## Containers
 
-Um container funcionará junto do nossos sistema operacional base, e conterá a nossa aplicação, ou seja, a aplicação será executada dentro dele. Criamos um container para cada aplicação, e esses containers vão dividir as funcionalidades do sistema operacional. Um container também tem como definição de ser uma instanciação de uma imagem do docker, que como analogia, uma imagem pode ser pensar como uma aplicação.
+Um container funcionará junto com nosso sistema operacional base e dentro dele funcionará a nossa aplicação, ou seja, a aplicação será executada dentro dele. Criamos um container para cada aplicação e esses containers vão dividir as funcionalidades do sistema operacional. Um container também tem como definição de ser uma instanciação de uma imagem do docker, que como analogia, uma imagem pode ser associada a uma aplicação.
 
 Não temos mais um sistema operacional para cada aplicação, já que agora as aplicações estão dividindo o mesmo sistema operacional, que está em cima do nosso hardware. Os próprios containers terão a lógica que se encarregará dessa divisão.
 
@@ -32,8 +32,27 @@ Algumas vantagens de containers:
 * Melhor controle do uso dos recursos do sistema operacional
 * Agilidade na hora de criar e remover aplicações
 * Maior facilidade na hora de trabalhar com diferentes versões de bibliotecas e linguagens
-* Fácil disponibilização de ambiente de desenvolvimento
-* Um container divide funcionalidades do sistema operacional(de um único SO)
+* Fácil disponibilização de ambiente de desenvolvimento. O docker criou uma padronização dos containers, para que assim ele possa ser portável
+* Um container divide funcionalidades do sistema operacional(de um único SO). Isso ajuda na eficiência dos servidores e também nos custos de licenciamento
+* Ideal para usar com a arquitetura de micro serviços
+* Ideal um deploy mais rápido
+
+## Docker containers vs. máquinas virtuais
+
+Os dois compartilham do mesmo conceito de isolação e alocação de benefícios, porém diferem no conceito de virtualização.
+
+### Containers
+
+É uma abstração da camada de aplicação que empacota o código e suas dependências tudo junto. Eles rodam na mesma máquina e compatilham do mesmo sistema operacional ao invés do hardware(que é usado nas VMs). Cada um roda um processo isolado. Containers usam bem menos espaço do que as VMs. Containers são mais portáteis e eficientes.
+
+![Alt text](image.png)
+
+### Máquina virtuais
+
+São uma abstração do hardware físico que transforma um servidor em muitos outros servidores. Quando falamos em abstração, estamos falando de memória RAM, HD, processadores, etc... Geralmente rodam em cima de uma camada chamada "Hypervisor" que permite múltiplas VMs(máquinas virtuais) rodar em uma única máquina. Cada VM tem uma cópia inteira do sistema operacional, a aplicação, e os binários/bibliotecas necessárias - fazendo com que isso ocupe GBs em uma única imagem. As VMs também podem ser mais lentas para iniciar.
+
+![Alt text](image-1.png)
+
 
 ## Tecnologias do Docker
 
@@ -158,4 +177,11 @@ O `docker-compose` é composto basicamente de três processos:
 
 ## Dockerizando uma aplicação rails
 
-[Link de referência do site oficial](https://docs.docker.com/compose/rails/#build-the-project)
+* [Rails samples do site docs.docker](https://docs.docker.com/samples/rails/)
+* [Quickstart: Compose and Rails](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/rails/)
+
+## Referências
+
+* [What is a Container?](https://www.docker.com/resources/what-container/)
+* [Youtube - Containers vs VMs](https://www.youtube.com/watch?v=cjXI-yxqGTI&ab_channel=IBMTechnology)
+* [Youtube - Virtual Machina (VM) vs Docker](https://www.youtube.com/watch?v=a1M_thDTqmU&ab_channel=IBMTechnology)
