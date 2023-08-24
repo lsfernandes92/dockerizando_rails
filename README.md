@@ -65,36 +65,36 @@ São uma abstração do hardware físico que transforma um servidor em muitos ou
 ## Principais comandos Docker
 
 * `docker` lista todos comandos disponíveis
-* `docker run NOME_DA_IMAGEM` ou `docker container run NOME_DA_IMAGEM` cria um container com a respectiva imagem passada como parâmetro.
-* `docker run --network my_net -v $(pwd):/workspace -it -d -p 8081:80 -n nome_container NOME_DA_IMAGEM` cria um container com os seguintes parâmetros:
+* `docker container run <NOME_DA_IMAGEM>` cria um container com a respectiva imagem passada como parâmetro.
+* `docker container run --network my_net -v $(pwd):/workspace -it -d -p 8081:80 -n nome_container <NOME_DA_IMAGEM>` cria um container com os seguintes parâmetros:
   * `--network` "sobe" o container da rede **my_net**
   * `-v` cria volume para salvar o conteúdo do container na máquina local, no caso salvando a **/workspace** na minha pasta local **pwd**. O **$(COMANDO)** serve para executar uma comando de terminal
   * `-it` inicia com container em modo iterativo
   * `-d` ou `--detach` não trava o terminal
   * `-p 8081:80` ou `--publish 8081:80` criar uma endereço localhost no porta **8081** para o nginx que escuta pela porta  **80** no container. Uma alternativa é usa o `-P` onde gera uma porta dinâmica automaticamente
   * `--name nome_container` renomeia o container para  **nome_container**
-* `docker run NOME_DA_IMAGEM:NOME_DA_VERSAO` cria um container com uma versão especifica
-* `docker stop CONTAINER_ID` para um container que está rodando atualmente
-* `docker stop -t 0 $(docker ps -q)` para todos containers sem tempo de espera
-* `docker start CONTAINER_ID` inicia um container que já foi baixado
+* `docker container run <NOME_DA_IMAGEM>:<NOME_DA_VERSAO>` cria um container com uma versão especifica
+* `docker container stop <CONTAINER_ID>` para um container que está rodando atualmente
+* `docker container stop -t 0 $(docker ps -q)` para todos containers sem tempo de espera
+* `docker container start <CONTAINER_ID>` inicia um container que já foi baixado
 * `docker ps` ou `docker container ls` lista todos containers ativos
 * `docker container ls -a` lista todos containers ativos e não ativos
-* `docker container rm CONTAINER_ID` remove um container pelo id
-* `docker rmi NOME_DA_IMAGEM`
-* `docker container inspect CONTAINER_ID` detalhes da configuração do container
-* `docker container top CONTAINER_ID` mostra processos do CONTAINER_ID
+* `docker container rm <CONTAINER_ID>` remove um container pelo id
+* `docker rmi <NOME_DA_IMAGEM>`
+* `docker container inspect <CONTAINER_ID>` detalhes da configuração do container
+* `docker container top <CONTAINER_ID>` mostra processos do CONTAINER_ID
 * `docker container stats` mostra status de usos de todos containers
-* `docker container attach CONTAINER_ID` volta para o modo iterativo do console do container
-* `docker container exec CONTAINER_ID COMANDO` executa um comando quando um container inicializado
-* `docker exec -it CONTAINER_ID bash` entra no console de um container já iniciado
-* `docker container rename NOME_ATUAL_CONTAINER NOVO_NOME_CONTAINER` altera o nome do container
-* `docker container commit -m "MENSAGEM" CONTAINER_ID` permite gerar nova imagem apartir de outro container modificado
-* `docker image history CONTAINER_ID`
-* `docker port CONTAINER_NAME PORT`
-* `docker image inspect --format '{{.Config.ExposedPorts}}' IMAGE_ID`
-* `docker network inspect NETWORK_ID`
-* `docker network create NOME_NETWORK`
-* `docker connect/disconnect NOME_NETWORK CONTAINER_NAME`
+* `docker container attach <CONTAINER_ID>` volta para o modo iterativo do console do container
+* `docker container exec <CONTAINER_ID> <COMANDO>` executa um comando quando um container inicializado
+* `docker container exec -it <CONTAINER_ID> bash` entra no console de um container já iniciado
+* `docker container rename <NOME_ATUAL_CONTAINER> <NOVO_NOME_CONTAINER>` altera o nome do container
+* `docker container commit -m "MENSAGEM" <CONTAINER_ID>` permite gerar nova imagem apartir de outro container modificado
+* `docker image history <CONTAINER_ID>` mostra os commits/camadas que constituem uma imagem
+* `docker port <CONTAINER_NAME> <PORT>` mostra qual porta está mapeada para o dado container e a dada porta
+* `docker image inspect --format '{{.Config.ExposedPorts}}' <IMAGE_ID>`
+* `docker network inspect <NETWORK_ID>`
+* `docker network create <NOME_NETWORK>`
+* `docker connect/disconnect <NOME_NETWORK> <CONTAINER_NAME>`
 
 ## Dockerfile
 
@@ -112,7 +112,7 @@ LABEL maintainer="Lucas Fernandes"
 
 RUN apt-get update
 
-RUN apt-get install -y openssh-server
+RUN apt-get install -y openssh-server vim
 RUN mkdir /var/run/sshd
 
 RUN echo 'root:root' |chpasswd
