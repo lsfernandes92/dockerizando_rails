@@ -175,6 +175,32 @@ O `docker-compose` é composto basicamente de três processos:
   2. **docker-compose.yml**: o trabalho desse arquivo é definir os serviços que irão rodar com a aplicação, assim como mapear volumes, portas e networks do container.
   3. Após isso é execudado o comando `docker-compose up`
 
+Exemplo de docker-compose.yml:
+
+```yaml
+version: '3'
+
+services:
+  cloud9:
+    image: sapk/cloud9
+    volumes:
+      - .:/workspace
+    ports:
+      - "8181:8181"
+      # Gera uma porta dinâmica pra porta 3000
+      - "3000"
+    command: --auth username:password
+```
+
+## Alguns comandos do docker-compose
+
+* `docker-compose up -d` acha o arquivo `docker-compose.yml` e "levanta" os container especificados no arquivo compose. A opção `-d` ou `--detach` não trava o terminal.
+* `docker-compose -f NOME_DO_DOCKER_COMPOSE up` quando o arquivo compose não é nomeado exatamente como `docker-compose.yml`, vc terá que especificar com a opção `-f` seguido do nome dado ao arquivo compose
+* `docker-compose up --scale NOME_SERVICO=NUM_INSTANCIAS` faz com que várias instancias de um serviço seja "levantado"
+* `docker-compose run -d -p 3005:300 -p 2222:22 rails` faz alterações em um container já em execução sem necessidade de alterar o arquivo `docker-compose.yml`
+* `docker-compose up --build` constroí/reconstroí as imagens e em seguida "levanta" os containers especificados nos `docker-compose.yml` 
+
+
 ## Dockerizando uma aplicação rails
 
 * [Rails samples do site docs.docker](https://docs.docker.com/samples/rails/)
