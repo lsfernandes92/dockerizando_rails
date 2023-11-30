@@ -200,7 +200,6 @@ services:
 * `docker-compose run -d -p 3005:300 -p 2222:22 rails` faz alterações em um container já em execução sem necessidade de alterar o arquivo `docker-compose.yml`
 * `docker-compose up --build` constroí/reconstroí as imagens e em seguida "levanta" os containers especificados nos `docker-compose.yml` 
 
-
 ## Dockerizando uma aplicação rails
 
 * [Rails samples do site docs.docker](https://docs.docker.com/samples/rails/)
