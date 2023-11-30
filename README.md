@@ -200,6 +200,21 @@ services:
 * `docker-compose run -d -p 3005:300 -p 2222:22 rails` faz alterações em um container já em execução sem necessidade de alterar o arquivo `docker-compose.yml`
 * `docker-compose up --build` constroí/reconstroí as imagens e em seguida "levanta" os containers especificados nos `docker-compose.yml` 
 
+## Solução de problemas
+
+### Ruby 2.5 com Rails 5 (ruby2_5_rails5)
+
+#### Erro de comando "not found" ao tentar buildar o projeto pela primera vez
+
+Tela do erro:
+
+![Alt text](image-2.png)
+
+Se isso acontecer tente rebuildar o Docker container usando o seguinte comando:
+
+```bash
+$ docker-compose build
+```
 
 ## Dockerizando uma aplicação rails
 
